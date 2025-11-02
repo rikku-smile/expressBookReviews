@@ -27,7 +27,7 @@ public_users.get('/isbn/:isbn',function (req, res) {
     if (books[isbn]) {
     return res.send(books[isbn]);
     }
-    return res.status(300).json({message: "ISBN " + isbn + "not found"});
+    return res.status(300).json({message: "ISBN " + isbn + " not found"});
 //   return res.status(300).json({message: "Yet to be implemented"});
  });
   
@@ -39,14 +39,22 @@ public_users.get('/author/:author',function (req, res) {
     if (chosen_books.length != 0) {
         return res.send(chosen_books);
     }
-    return res.status(300).json({message: "Author " + author + "not found"});        
+    return res.status(300).json({message: "Author " + author + " not found"});        
 //   return res.status(300).json({message: "Yet to be implemented"});
 });
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  const title=req.params.title;
+    let chosen_books = booksobject.filter((book) => 
+        book.title === title);
+    if (chosen_books.length != 0) {
+        return res.send(chosen_books); 
+    }
+    return res.status(300).json({message: "Title " + title + " not found"});        
+
+  //return res.status(300).json({message: "Yet to be implemented"});
 });
 
 //  Get book review
