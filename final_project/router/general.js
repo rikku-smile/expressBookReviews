@@ -20,7 +20,11 @@ public_users.get('/',function (req, res) {
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  // Based on this: https://discussions.edx.org/course-v1:IBM+CAD220EN+3T2022/posts/674f891d7febe50470781ddc
+  // The ISBN refers to the number of the book of the bookds.js file
+  const isbn=req.params.isbn;
+  return res.send(books[isbn]);
+//   return res.status(300).json({message: "Yet to be implemented"});
  });
   
 // Get book details based on author
