@@ -6,41 +6,27 @@ const public_users = express.Router();
 
 let booksobject = Object.values(books)
 
-// Check if a user with the given username already exists
-const doesExist = (username) => {
-    // Filter the users array for any user with the same username
-    let userswithsamename = public_users.filter((user) => {
-        return user.username === username;
-    });
-    // Return true if any user with the same username is found, otherwise false
-    if (userswithsamename.length > 0) {
-        return true;
-    } else {
-        return false;
-    }
-}
+// Get the book list available in the shop
+public_users.get('/',function (req, res) {
+  //Write your code here
+  return res.send(JSON.stringify(books,null,4));
+  //return res.status(300).json({message: "Yet to be implemented"});
+});
 
 public_users.post("/register", (req,res) => {
   const username = req.body.username;
   const password = req.body.password;
   if (username && password) {
     // Check if user exists
-    console.log(public_users)
-    if (!doesExist(username)) {
-        public_users.push({"username": username, "password": password});
+    console.log(public_users);
+    if (!isValid(username)) {
+        users.push({"username": username, "password": password});
         return res.status(200).json({message: "User " + username + " successfully registered."});
     }
     return res.status(404).json({message: "User " + username + " already registered."});
 
   }
-  return res.status(404).json({message: "Unable to register user. Check you have provided an username and password."});
-});
-
-// Get the book list available in the shop
-public_users.get('/',function (req, res) {
-  //Write your code here
-  return res.send(JSON.stringify(books,null,4));
-  //return res.status(300).json({message: "Yet to be implemented"});
+    return res.status(404).json({message: "Unable to register user. Check you have provided an username and password."});
 });
 
 // Get book details based on ISBN
