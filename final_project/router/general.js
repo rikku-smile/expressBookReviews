@@ -23,7 +23,7 @@ public_users.post("/register", (req,res) => {
         users.push({"username": username, "password": password});
         return res.status(200).json({message: "User " + username + " successfully registered."});
     }
-    return res.status(404).json({message: "User " + username + " already registered."});
+    return res.status(400).json({message: "User " + username + " already registered."});
 
   }
     return res.status(404).json({message: "Unable to register user. Check you have provided an username and password."});
@@ -38,7 +38,7 @@ public_users.get('/isbn/:isbn',function (req, res) {
     if (books[isbn]) {
     return res.send(books[isbn]);
     }
-    return res.status(300).json({message: "ISBN " + isbn + " not found"});
+    return res.status(404).json({message: "ISBN " + isbn + " not found"});
 //   return res.status(300).json({message: "Yet to be implemented"});
  });
   
@@ -50,7 +50,7 @@ public_users.get('/author/:author',function (req, res) {
     if (chosen_books.length != 0) {
         return res.send(chosen_books);
     }
-    return res.status(300).json({message: "Author " + author + " not found"});        
+    return res.status(404).json({message: "Author " + author + " not found"});        
 //   return res.status(300).json({message: "Yet to be implemented"});
 });
 
@@ -63,7 +63,7 @@ public_users.get('/title/:title',function (req, res) {
     if (chosen_books.length != 0) {
         return res.send(chosen_books); 
     }
-    return res.status(300).json({message: "Title " + title + " not found"});        
+    return res.status(404).json({message: "Title " + title + " not found"});        
 
   //return res.status(300).json({message: "Yet to be implemented"});
 });
@@ -75,7 +75,7 @@ public_users.get('/review/:isbn',function (req, res) {
     if (books[isbn]) {
         res.send(books[isbn].reviews);
     }
-    return res.status(300).json({message: "ISBN " + isbn + " not found"});
+    return res.status(404).json({message: "ISBN " + isbn + " not found"});
 
   // return res.status(300).json({message: "Yet to be implemented"});
 });
